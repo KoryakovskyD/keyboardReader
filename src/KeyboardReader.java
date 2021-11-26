@@ -63,10 +63,10 @@ public class KeyboardReader {
         try (FileOutputStream file = new FileOutputStream(fileName)){
             do {
                 n = System.in.read(buf);
-                file.write(buf);
+                // записывать надо ровно столько, сколько мы выгрузили в буфер
+                file.write(buf, 0, n);
                 // приведем байтовый массив к строке и выведем на экран
                 tmp = new String(buf, 0, n);
-                System.out.println(tmp);
                 if (tmp.equalsIgnoreCase(END))
                     return;
             } while (true);
